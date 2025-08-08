@@ -1,0 +1,41 @@
+Let power be 42
+Let name be "Eldrin"
+Let max_power be 100
+
+Reveal the truth of name
+Reveal the truth of "Initiating spell test..."
+
+If fate whispers power wanes below 50
+    Reveal the truth of "Power is below half."
+Else, when all omens fail
+    Reveal the truth of "Power is strong."
+Let the omen pass
+
+Conjure an empty tome called energies
+Add 10 to the pages of energies
+Add 20 to the pages of energies
+Add 30 to the pages of energies
+
+Let count be the length of energies
+Reveal the truth of count
+
+Chant upon energies each soul called e
+    Reveal the truth of e
+Complete the chant
+
+Let i be 0
+#Sustain the chant while i wanes below 3
+#    Reveal the truth of i
+#    Empower i by 1
+#Complete the chant
+
+Inscribe ritual greet with person
+    Let message be "Greetings, " + person
+    Reveal the truth of message
+    Return message to the aether
+Close the incantation
+
+Invoke the ritual of greet, offering "Traveler"
+
+Seal the spell
+So it is written.
