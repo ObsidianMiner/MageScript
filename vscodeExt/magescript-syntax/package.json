@@ -1,0 +1,25 @@
+{
+  "name": "magescript-syntax",
+  "displayName": "magescript-syntax",
+  "description": "Syntax highlighting for .spell files",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "magescript",
+      "aliases": ["MageScript", "spell"],
+      "extensions": [".spell"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "magescript",
+      "scopeName": "source.magescript",
+      "path": "./syntaxes/magescript.tmLanguage.json"
+    }]
+  }
+}

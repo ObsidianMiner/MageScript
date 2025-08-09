@@ -24,10 +24,10 @@ Chant upon energies each soul called e
 Complete the chant
 
 Let i be 0
-#Sustain the chant while i wanes below 3
-#    Reveal the truth of i
-#    Empower i by 1
-#Complete the chant
+Sustain the chant while i wanes below 3 holds true
+    Reveal the truth of i
+    Empower i by 1
+Complete the chant
 
 Inscribe ritual greet with person
     Let message be "Greetings, " + person

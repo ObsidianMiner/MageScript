@@ -1,0 +1,170 @@
+{
+  "name": "MageScript",
+  "scopeName": "source.magescript",
+  "fileTypes": ["spell"],
+  "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "patterns": [
+    {
+      "name": "comment.line.number-sign.magescript",
+      "match": "#.*$"
+    },
+    {
+      "name": "keyword.control.magescript",
+      "match": "\\b(inscribe ritual|if fate whispers|else if fate shifts|else when all omens fail|close the incantation|let the omen pass|the spell is complete)\\b"
+    },
+    {
+      "name": "keyword.operator.assignment.magescript",
+      "match": "\\b(let|empower|drain|transmute|return|reveal|add|call forth|call upon|conjure)\\b"
+    },
+    {
+      "name": "entity.name.function.magescript",
+      "match": "\\b(ritual|invoke the ritual of|offering)\\b"
+    },
+    {
+      "name": "string.quoted.double.magescript",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "match": "\\\\.",
+          "name": "constant.character.escape.magescript"
+        }
+      ]
+    },
+    {
+      "name": "constant.numeric.magescript",
+      "match": "\\b\\d+\\b"
+    },
+    {
+      "name": "variable.assignment.magescript",
+      "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
+    }
+  ],
+  "repository": {
+    "functions": {
+      "patterns": [
+        {
+          "match": "\\binscribe ritual\\b",
+          "name": "keyword.control.function.magescript"
+        },
+        {
+          "match": "\\binvoke the ritual of\\b",
+          "name": "keyword.control.function.call.magescript"
+        },
+        {
+          "match": "\\breturn .+ to the aether\\b",
+          "name": "keyword.control.return.magescript"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "match": "\\blet\\s+\\w+\\s+be\\b",
+          "name": "keyword.control.variable.declare.magescript"
+        },
+        {
+          "match": "\\bspeak the name of\\b",
+          "name": "keyword.control.variable.string.magescript"
+        },
+        {
+          "match": "\\bempower\\b",
+          "name": "keyword.operator.empower.magescript"
+        },
+        {
+          "match": "\\bdrain\\b",
+          "name": "keyword.operator.drain.magescript"
+        },
+        {
+          "match": "\\btransmute\\b",
+          "name": "keyword.operator.transmute.magescript"
+        }
+      ]
+    },
+    "output": {
+      "patterns": [
+        {
+          "match": "\\breveal the truth of\\b",
+          "name": "keyword.control.print.magescript"
+        },
+        {
+          "match": "\\blet the spell echo:\\b",
+          "name": "keyword.control.print.string.magescript"
+        }
+      ]
+    },
+    "conditionals": {
+      "patterns": [
+        {
+          "match": "\\bif fate whispers\\b",
+          "name": "keyword.control.conditional.if.magescript"
+        },
+        {
+          "match": "\\belse if fate shifts\\b",
+          "name": "keyword.control.conditional.elseif.magescript"
+        },
+        {
+          "match": "\\belse when all omens fail\\b",
+          "name": "keyword.control.conditional.else.magescript"
+        }
+      ]
+    },
+    "loops": {
+      "patterns": [
+        {
+          "match": "\\bchant upon\\b",
+          "name": "keyword.control.loop.for.magescript"
+        },
+        {
+          "match": "\\bsustain the chant while\\b",
+          "name": "keyword.control.loop.while.magescript"
+        }
+      ]
+    },
+    "lists": {
+      "patterns": [
+        {
+          "match": "\\bconjure an empty tome called\\b",
+          "name": "keyword.control.list.create.magescript"
+        },
+        {
+          "match": "\\badd\\b.+\\bto the pages of\\b",
+          "name": "keyword.control.list.add.magescript"
+        },
+        {
+          "match": "\\b(call forth the word|call upon the phrase|invoke the sacred phrase)\\b",
+          "name": "keyword.control.list.add.string.magescript"
+        }
+      ]
+    },
+    "closures": {
+      "patterns": [
+        {
+          "match": "\\bclose the incantation\\b",
+          "name": "keyword.control.block.close.function.magescript"
+        },
+        {
+          "match": "\\blet the omen pass\\b",
+          "name": "keyword.control.block.close.if.magescript"
+        },
+        {
+          "match": "\\bcomplete the chant\\b",
+          "name": "keyword.control.block.close.loop.magescript"
+        },
+        {
+          "match": "\\bseal the spell\\b",
+          "name": "keyword.control.block.close.any.magescript"
+        }
+      ]
+    },
+    
+    "endings": {
+      "patterns": [
+        {
+          "match": "\\b(so it is written|the spell is complete|thus concludes the incantation|let it be done)\\b",
+          "name": "keyword.control.end.magescript"
+        }
+      ]
+    }
+  }
+}

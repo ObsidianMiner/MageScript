@@ -16,6 +16,9 @@ print(count)
 for e in energies:
     print(e)
 i = 0
+while i < 3:
+    print(i)
+    i += 1
 def greet(person):
     message = "greetings, " + person
     print(message)
