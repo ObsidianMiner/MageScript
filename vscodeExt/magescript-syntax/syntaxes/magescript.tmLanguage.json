@@ -2,94 +2,224 @@
   "name": "MageScript",
   "scopeName": "source.magescript",
   "fileTypes": ["spell"],
-  "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
   "patterns": [
-    {
-      "name": "comment.line.number-sign.magescript",
-      "match": "#.*$"
-    },
-    {
-      "name": "keyword.control.magescript",
-      "match": "\\b(inscribe ritual|if fate whispers|else if fate shifts|else when all omens fail|close the incantation|let the omen pass|the spell is complete)\\b"
-    },
-    {
-      "name": "keyword.operator.assignment.magescript",
-      "match": "\\b(let|empower|drain|transmute|return|reveal|add|call forth|call upon|conjure)\\b"
-    },
-    {
-      "name": "entity.name.function.magescript",
-      "match": "\\b(ritual|invoke the ritual of|offering)\\b"
-    },
-    {
-      "name": "string.quoted.double.magescript",
-      "begin": "\"",
-      "end": "\"",
+    { "include": "#comments" },
+    { "include": "#functions" },
+    { "include": "#keywords" },
+    { "include": "#conditionals" },
+    { "include": "#loops" },
+    { "include": "#lists" },
+    { "include": "#closures" },
+    { "include": "#output" },
+    { "include": "#comparisons" },
+    { "include": "#strings" },
+    { "include": "#numbers" }
+  ],
+  "repository": {
+    "comments": {
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.magescript"
+          "name": "comment.line.number-sign",
+          "match": "#.*$",
+          "flags": "i"
         }
       ]
     },
-    {
-      "name": "constant.numeric.magescript",
-      "match": "\\b\\d+\\b"
-    },
-    {
-      "name": "variable.assignment.magescript",
-      "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
-    }
-  ],
-  "repository": {
     "functions": {
       "patterns": [
         {
-          "match": "\\binscribe ritual\\b",
-          "name": "keyword.control.function.magescript"
+          "name": "keyword.control.function.call",
+          "match": "\\blet the spell echo\\b",
+          "flags": "i"
         },
         {
-          "match": "\\binvoke the ritual of\\b",
-          "name": "keyword.control.function.call.magescript"
+          "name": "meta.output.reveal",
+          "begin": "\\breveal the truth of\\b\\s+",
+          "beginCaptures": {
+            "0": { "name": "keyword.control.print" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#numbers" },
+            { "include": "#variables" },
+            { "include": "#strings" }
+          ]
         },
         {
-          "match": "\\breturn .+ to the aether\\b",
-          "name": "keyword.control.return.magescript"
+          "name": "meta.function.call",
+          "begin": "\\bconjure the phrase\\b\\s+(\\w+)\\s*(?:using\\s+([\\w\\s,]+))?",
+          "beginCaptures": {
+            "1": { "name": "variable" },
+            "2": { "name": "variable.parameter" }
+          },
+          "end": "$"
+        },
+        {
+          "name": "meta.function.call",
+          "begin": "\\bspeak the name of\\b\\s+(\\w+)\\s*(?:to be\\s+([\\w\\s,]+))?",
+          "beginCaptures": {
+            "1": { "name": "variable" },
+            "2": { "name": "variable.parameter" }
+          },
+          "end": "$"
+        },
+        {
+          "name": "meta.function.definition",
+          "begin": "\\binscribe ritual\\b\\s+(\\w+)\\s*(?:with\\s+([\\w\\s,]+))?",
+          "beginCaptures": {
+            "1": { "name": "entity.name.function" },
+            "2": { "name": "variable.parameter" }
+          },
+          "end": "$"
+        },
+        {
+          "name": "meta.function.call",
+          "begin": "\\binvoke the ritual of\\b\\s+(\\w+)",
+          "beginCaptures": {
+            "0": { "name": "keyword.control.function.call" },
+            "1": { "name": "entity.name.function" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            {
+              "match": "\\boffering\\b",
+              "name": "keyword.control.arguments"
+            },
+            { "include": "#variables" },
+            { "include": "#strings" },
+            { "include": "#numbers" }
+          ]
+        },
+        {
+          "match": "\\boffering\\b",
+          "name": "keyword.control",
+          "flags": "i"
+        },
+        {
+          "name": "meta.control.return",
+          "begin": "\\breturn\\b\\s+",
+          "beginCaptures": {
+            "0": { "name": "keyword.control.flow.return" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#numbers" },
+            { "include": "#variables" },
+            { "include": "#strings" },
+            {
+              "match": "\\bto the aether\\b",
+              "name": "keyword.control.flow.return"
+            }
+          ]
         }
       ]
     },
-    "variables": {
+    "keywords": {
       "patterns": [
         {
-          "match": "\\blet\\s+\\w+\\s+be\\b",
-          "name": "keyword.control.variable.declare.magescript"
+          "name": "meta.declaration.length",
+          "begin": "\\blet\\b\\s+(\\w+)\\s+be the length of\\s+(\\w+)",
+          "beginCaptures": {
+            "0": { "name": "keyword.declaration" },
+            "1": { "name": "variable" },
+            "2": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)"
         },
         {
-          "match": "\\bspeak the name of\\b",
-          "name": "keyword.control.variable.string.magescript"
+          "name": "meta.declaration.length",
+          "begin": "\\blet\\b\\s+(\\w+)\\s+be the spelltext of\\s+(\\w+)",
+          "beginCaptures": {
+            "0": { "name": "keyword.declaration" },
+            "1": { "name": "variable" },
+            "2": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)"
         },
         {
-          "match": "\\bempower\\b",
-          "name": "keyword.operator.empower.magescript"
+          "name": "meta.control",
+          "begin": "\\bshare\\b\\s+",
+          "beginCaptures": {
+            "0": { "name": "keyword.control" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#variables" },
+            {
+              "match": "\\bwith the spirtsther\\b",
+              "name": "keyword.control.flow.return"
+            }
+          ]
+        },
+        {
+          "name": "keyword.control",
+          "match": "\\blet the spell echo\\b",
+          "flags": "i"
+        },
+        {
+          "name": "meta.operation.empower",
+          "begin": "\\bempower\\b\\s+(\\w+)\\s+by\\s+",
+          "beginCaptures": {
+            "1": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#numbers" },
+            { "include": "#variables" }
+          ]
+        },
+        {
+          "name": "meta.operation.drain",
+          "begin": "\\bdrain\\b\\s+(\\w+)\\s+by\\s+",
+          "beginCaptures": {
+            "1": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#numbers" },
+            { "include": "#variables" }
+          ]
+        },
+        {
+          "name": "meta.operation.transmute",
+          "begin": "\\btransmute\\b\\s+(\\w+)\\s+with\\s+",
+          "beginCaptures": {
+            "1": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#numbers" },
+            { "include": "#variables" }
+          ]
         },
         {
           "match": "\\bdrain\\b",
-          "name": "keyword.operator.drain.magescript"
+          "name": "keyword.operator",
+          "flags": "i"
         },
         {
           "match": "\\btransmute\\b",
-          "name": "keyword.operator.transmute.magescript"
-        }
-      ]
-    },
-    "output": {
-      "patterns": [
-        {
-          "match": "\\breveal the truth of\\b",
-          "name": "keyword.control.print.magescript"
+          "name": "keyword.operator",
+          "flags": "i"
         },
         {
-          "match": "\\blet the spell echo:\\b",
-          "name": "keyword.control.print.string.magescript"
+          "name": "keyword.declaration",
+          "begin": "\\blet\\b\\s+(\\w+)\\s+\\b(be)\\b",
+          "beginCaptures": {
+            "0": { "name": "keyword.declaration" },
+            "1": { "name": "variable" },
+            "2": { "name": "keyword.declaration" }
+          },
+          "end": "(?=\\s|$)"
+        },
+        {
+          "match": "\\blet\\s+\\w+\\s+be\\b",
+          "name": "keyword.declaration"
+        },
+        {
+          "name": "keyword.control.end.spell",
+          "match": "\\b(so it is written|the spell is complete|thus concludes the incantation|let it be done)\\b",
+          "flags": "i"
         }
       ]
     },
@@ -97,43 +227,82 @@
       "patterns": [
         {
           "match": "\\bif fate whispers\\b",
-          "name": "keyword.control.conditional.if.magescript"
+          "name": "keyword.control.conditional.if",
+          "flags": "i"
         },
         {
           "match": "\\belse if fate shifts\\b",
-          "name": "keyword.control.conditional.elseif.magescript"
+          "name": "keyword.control.conditional.elseif",
+          "flags": "i"
         },
         {
           "match": "\\belse when all omens fail\\b",
-          "name": "keyword.control.conditional.else.magescript"
+          "name": "keyword.control.conditional.else",
+          "flags": "i"
+        },
+        {
+          "match": "\\blet the omen pass\\b",
+          "name": "keyword.control.conditional.end",
+          "flags": "i"
         }
       ]
     },
     "loops": {
       "patterns": [
         {
-          "match": "\\bchant upon\\b",
-          "name": "keyword.control.loop.for.magescript"
+          "name": "keyword.control.loop.for",
+          "begin": "\\bchant upon\\b\\s+(\\w+)\\s+each soul called\\s+(\\w+)",
+          "beginCaptures": {
+            "0": { "name": "keyword.control.loop.for" },
+            "1": { "name": "variable" },
+            "2": { "name": "variable" }
+          },
+          "end": "$"
         },
         {
           "match": "\\bsustain the chant while\\b",
-          "name": "keyword.control.loop.while.magescript"
+          "name": "keyword.control.loop.while",
+          "flags": "i"
+        },
+        {
+          "match": "\\bcomplete the chant\\b",
+          "name": "keyword.control.loop.end",
+          "flags": "i"
         }
       ]
     },
     "lists": {
       "patterns": [
         {
-          "match": "\\bconjure an empty tome called\\b",
-          "name": "keyword.control.list.create.magescript"
+          "name": "meta.list.creation",
+          "begin": "\\bconjure an empty tome called\\b\\s+(\\w+)",
+          "beginCaptures": {
+            "0": { "name": "keyword.control.list.creation" },
+            "1": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)"
         },
         {
-          "match": "\\badd\\b.+\\bto the pages of\\b",
-          "name": "keyword.control.list.add.magescript"
+          "name": "meta.list.append",
+          "begin": "\\badd\\b\\s+",
+          "beginCaptures": {
+            "0": { "name": "keyword.control.list.append" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#strings" },
+            { "include": "#numbers" },
+            { "include": "#variables" },
+            {
+              "match": "\\bto the pages of\\b",
+              "name": "keyword.control.list.target"
+            }
+          ]
         },
         {
           "match": "\\b(call forth the word|call upon the phrase|invoke the sacred phrase)\\b",
-          "name": "keyword.control.list.add.string.magescript"
+          "name": "keyword.control",
+          "flags": "i"
         }
       ]
     },
@@ -141,28 +310,72 @@
       "patterns": [
         {
           "match": "\\bclose the incantation\\b",
-          "name": "keyword.control.block.close.function.magescript"
-        },
-        {
-          "match": "\\blet the omen pass\\b",
-          "name": "keyword.control.block.close.if.magescript"
-        },
-        {
-          "match": "\\bcomplete the chant\\b",
-          "name": "keyword.control.block.close.loop.magescript"
+          "name": "keyword.control.block.end",
+          "flags": "i"
         },
         {
           "match": "\\bseal the spell\\b",
-          "name": "keyword.control.block.close.any.magescript"
+          "name": "keyword.control.block.end",
+          "flags": "i"
         }
       ]
     },
-    
+    "comparisons": {
+      "patterns": [
+        {
+          "match": "\\bwanes below\\b",
+          "name": "keyword.operator.comparison",
+          "flags": "i"
+        },
+        {
+          "match": "\\brises above\\b",
+          "name": "keyword.operator.comparison",
+          "flags": "i"
+        },
+        {
+          "match": "\\bmirrors\\b",
+          "name": "keyword.operator.comparison",
+          "flags": "i"
+        }
+      ]
+    },
     "endings": {
       "patterns": [
         {
           "match": "\\b(so it is written|the spell is complete|thus concludes the incantation|let it be done)\\b",
-          "name": "keyword.control.end.magescript"
+          "name": "keyword.control",
+          "flags": "i"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "match": "\\\\.",
+              "name": "constant.character.escape"
+            }
+          ]
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "match": "\\b\\d+\\b",
+          "name": "constant.numeric"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b",
+          "name": "variable"
         }
       ]
     }

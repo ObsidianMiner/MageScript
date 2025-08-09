@@ -1,0 +1,30 @@
+let percent be 50
+
+inscribe ritual filling with amount
+    sustain the chant while amount rises above 0 holds true
+        share percent with the spirts
+        let p be the spelltext of percent
+        drain amount by 1
+        empower percent by 1
+        speak the name of symbol to be %
+        conjure the phrase message using percent and symbol
+        reveal the truth of message
+    complete the chant
+close the incantation
+
+inscribe ritual draining with amount
+    sustain the chant while amount rises above 0 holds true
+        share percent with the spirts
+        let p be the spelltext of percent
+        drain amount by 1
+        drain percent by 1
+        speak the name of symbol to be %
+        conjure the phrase message using percent and symbol
+        reveal the truth of message
+    complete the chant
+close the incantation
+
+invoke the ritual of filling offering 5
+invoke the ritual of draining offering 55
+
+thus concludes the incantation

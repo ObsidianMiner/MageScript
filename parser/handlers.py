@@ -42,11 +42,32 @@ class Handlers:
         py_line = f"return {self.expr_clean(value)}"
         self.py_lines.append(self.indent() + py_line)
 
-    def parse_function_call(self, name, args):
-        args = args or ""
-        args_clean = " and ".join(arg.strip() for arg in args.split(',')) if args else ""
-        py_line = f"{name}({args_clean})"
+    def parse_global(self, value):
+        py_line = f"global {self.expr_clean(value)}"
         self.py_lines.append(self.indent() + py_line)
+
+    def parse_function_call(self, name, params):
+        params = params or ""
+        params_clean = ", ".join(p.strip() for p in params.split('and')) if params else ""
+        py_line = f"{name}({params_clean})"
+        self.py_lines.append(self.indent() + py_line)
+
+    def parse_join_strings(self, name, args):
+        args = args or ""
+        parts = [part.strip() for part in args.split('and') if part.strip()]
+        joined = " + ".join(f"str({part})" for part in parts)
+        self.py_lines.append(self.indent() + f"{name} = {joined}")
+
+    def parse_cast_string(self, name, value):
+        py_line = f"{name} = str({self.expr_clean(value)})"
+        self.py_lines.append(self.indent() + py_line)
+
+    def parse_function_def(self, name, params):
+        params = params or ""
+        params_clean = ", ".join(p.strip() for p in params.split('and')) if params else ""
+        self.py_lines.append(self.indent() + f"def {name}({params_clean}):")
+        self.parser.indent_level += 1
+        self.parser.block_stack.append('function')
 
     def parse_list_conjure(self, name):
         py_line = f"{name} = []"
@@ -63,13 +84,6 @@ class Handlers:
     def parse_length(self, var_name, list_name):
         py_line = f"{var_name} = len({list_name})"
         self.py_lines.append(self.indent() + py_line)
-
-    def parse_function_def(self, name, params):
-        params = params or ""
-        params_clean = ", ".join(p.strip() for p in params.split(',')) if params else ""
-        self.py_lines.append(self.indent() + f"def {name}({params_clean}):")
-        self.parser.indent_level += 1
-        self.parser.block_stack.append('function')
 
     def parse_if(self, condition):
         self.py_lines.append(self.indent() + f"if {self.condition_clean(condition)}:")
@@ -143,7 +157,7 @@ class Handlers:
         #filler_words = ["the", "of", "by", "to", "from", "with", "and", "a", "an", "on", "in", "upon", "each", "called", "as"]
         #pattern = r"\b(" + "|".join(filler_words) + r")\b"
         #expr = re.sub(pattern, "", expr)
-        #return expr.strip()
+        return expr.strip()
 
     def condition_clean(self, cond):
         # Similar cleaning to expr_clean but keep logical connectors intact

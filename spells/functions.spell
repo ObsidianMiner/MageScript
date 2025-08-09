@@ -1,8 +1,7 @@
 # Define a ritual to add two numbers
-inscribe ritual add with startith, b
+inscribe ritual add with startith b
     let result be startith
-    empower result by b
-    return result to the aether
+    return e to the aether
 close the incantation
 
 # Define a ritual to greet a user
@@ -14,11 +13,11 @@ close the incantation
 # Define a conditional function
 inscribe ritual inspection with mana
     if fate whispers mana wanes below 10
-        let the spell echo: "Low mana!"
+        let the spell echo "Low mana!"
     else if fate shifts mana mirrors 10
-        let the spell echo: "Mana is exactly ten."
+        let the spell echo "Mana is exactly ten."
     else when all omens fail
-        let the spell echo: "Mana looks good."
+        let the spell echo "Mana looks good."
     let the omen pass
 close the incantation
 
@@ -27,7 +26,7 @@ let sum be invoke the ritual of add offering 7 and 5
 reveal the truth of sum
 
 # Call the greeting function
-invoke the ritual of greet offering "Aria"
+invoke the ritual of greet offering sum
 
 # Call the mana check function
 invoke the ritual of inspection offering 3
@@ -35,4 +34,4 @@ invoke the ritual of inspection offering 10
 invoke the ritual of inspection offering 17
 
 # End the spell
-the spell is complete
+so it is written.

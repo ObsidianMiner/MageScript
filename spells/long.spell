@@ -1,41 +1,42 @@
-Let power be 42
-Let name be "Eldrin"
-Let max_power be 100
+let power be 42
+let name be "eldrin"
+let max_power be 100
 
-Reveal the truth of name
-Reveal the truth of "Initiating spell test..."
+reveal the truth of name
+reveal the truth of "initiating spell test..."
 
-If fate whispers power wanes below 50
-    Reveal the truth of "Power is below half."
-Else, when all omens fail
-    Reveal the truth of "Power is strong."
-Let the omen pass
+if fate whispers power wanes below 50
+    reveal the truth of "power is below half."
+else, when all omens fail
+    reveal the truth of "power is strong."
+let the omen pass
 
-Conjure an empty tome called energies
-Add 10 to the pages of energies
-Add 20 to the pages of energies
-Add 30 to the pages of energies
+conjure an empty tome called energies
+add 10 to the pages of energies
+add 20 to the pages of energies
+add 30 to the pages of energies
 
-Let count be the length of energies
-Reveal the truth of count
+let count be the length of energies
+reveal the truth of count
 
-Chant upon energies each soul called e
-    Reveal the truth of e
-Complete the chant
+chant upon energies each soul called e
+    reveal the truth of e
+complete the chant
 
-Let i be 0
-Sustain the chant while i wanes below 3 holds true
-    Reveal the truth of i
-    Empower i by 1
-Complete the chant
+let i be 0
+sustain the chant while i wanes below 3 holds true
+    reveal the truth of i
+    empower i by 1
+complete the chant
 
-Inscribe ritual greet with person
-    Let message be "Greetings, " + person
-    Reveal the truth of message
-    Return message to the aether
-Close the incantation
+inscribe ritual greet with person
+    let message be "greetings, " + person
+    reveal the truth of message
+    return message to the aether
+close the incantation
 
-Invoke the ritual of greet, offering "Traveler"
+invoke the ritual of greet offering "traveler"
+invoke the rutual of greet offering "s"
 
-Seal the spell
-So it is written.
+seal the spell
+so it is written.

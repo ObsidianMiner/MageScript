@@ -1,10 +1,10 @@
-# MageScript
-A dumb programing language where you have to speak eveything outloud like a wizard casting a spell.
+# MageScript  
+A dumb programming language where you have to speak everything out loud like a wizard casting a spell.
 
-### The voice has not been added yet but here are the current features:
-- Interpret .spell files to .py and automaticly run it.
-- Installs python automaticly if not already installed.
-- Use interpret command in powershell to interpret, and run .spell files. Otherwise simply run interpret.py
+### Voice input hasn't been added yet, but here are the current features:
+- Interprets .spell files into .py and automatically runs them.  
+- Automatically installs Python if it's not already installed.  
+- Use the interpret command in PowerShell to interpret and run .spell files. Otherwise, simply run interpret.py.
 
 ## Example .spell file:
 ```pickle.spell

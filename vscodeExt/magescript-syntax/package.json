@@ -2,7 +2,7 @@
   "name": "magescript-syntax",
   "displayName": "magescript-syntax",
   "description": "Syntax highlighting for .spell files",
-  "version": "0.0.1",
+  "version": "2.5.1",
   "engines": {
     "vscode": "^1.103.0"
   },
