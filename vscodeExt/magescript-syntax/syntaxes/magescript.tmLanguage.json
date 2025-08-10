@@ -111,6 +111,22 @@
               "name": "keyword.control.flow.return"
             }
           ]
+        },
+        {
+          "name": "meta.control.delete",
+          "begin": "\\bpurge the chroniccle of\\b\\s+",
+          "beginCaptures": {
+            "0": { "name": "keyword.control.flow.return" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#variables" },
+            { "include": "#strings" },
+            {
+              "match": "\\bfrom the vault of aeons that even the gods forget it once was\\b",
+              "name": "keyword.control.flow.return"
+            }
+          ]
         }
       ]
     },
@@ -193,7 +209,89 @@
           ]
         },
         {
+          "name": "meta.operation.multiply",
+          "begin": "\\benfold\\b\\s+(\\w+)\\s+with the multiplicative power of\\s+",
+          "beginCaptures": {
+            "1": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#numbers" },
+            { "include": "#variables" }
+          ]
+        },
+        {
+          "name": "meta.operation.divide",
+          "begin": "\\bdivide the soul of\\b\\s+(\\w+)\\s+by the decree of\\s+",
+          "beginCaptures": {
+            "1": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#numbers" },
+            { "include": "#variables" }
+          ]
+        },
+        {
+          "name": "meta.operation.modulo",
+          "begin": "\\bmark\\b\\s+(\\w+)\\s+with the remainder after striking by\\s+",
+          "beginCaptures": {
+            "1": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#numbers" },
+            { "include": "#variables" }
+          ]
+        },
+        {
+          "name": "meta.operation.read",
+          "begin": "\\bunseal the scroll\\b\\s+(\\w+)\\s+from\\s+",
+          "beginCaptures": {
+            "1": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#strings" },
+            { "include": "#variables" }
+          ]
+        },
+        {
+          "name": "meta.operation.write",
+          "begin": "\\bby quill of eternity let the tome of\\b\\s+(\\w+)\\s+be born etched in\\s+",
+          "beginCaptures": {
+            "1": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#strings" },
+            { "include": "#variables" }
+          ]
+        },
+        {
+          "name": "meta.operation.append",
+          "begin": "\\bextend the infinite scroll of\\b\\s+(\\w+)\\s+with\\s+",
+          "beginCaptures": {
+            "1": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#strings" },
+            { "include": "#variables" }
+          ]
+        },
+        {
           "match": "\\bdrain\\b",
+          "name": "keyword.operator",
+          "flags": "i"
+        },
+        {
+          "match": "\\band sealed in flame\\b",
+          "name": "keyword.operator",
+          "flags": "i"
+        },
+        {
+          "match": "\\bthat its verses may never cease\\b",
           "name": "keyword.operator",
           "flags": "i"
         },
@@ -262,6 +360,16 @@
         {
           "match": "\\bsustain the chant while\\b",
           "name": "keyword.control.loop.while",
+          "flags": "i"
+        },
+        {
+          "match": "\\bscatter the chant to winds of finality\\b",
+          "name": "keyword.control.loop.break",
+          "flags": "i"
+        },
+        {
+          "match": "\\bpass over this soul in silence\\b",
+          "name": "keyword.control.loop.continue",
           "flags": "i"
         },
         {

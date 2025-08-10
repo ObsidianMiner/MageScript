@@ -10,8 +10,10 @@ A dumb programming language where you have to speak everything out loud like a w
 
 1. Run setup.bat
     - installs python, and "interpret" powershell command
-2. Check out reference spells, and MageScript Language Reference.md
-3. Create a .spell file anywhere on your device, and run it by putting this into powershell:
+2. If you are using vs code install the MageScript extension via vscodeExt/magescript-syntax/magescript-syntax-3.0.1.vsix
+3. Check out reference spells, and MageScript Language Reference.md
+    - I recommend popping up the language reference in a side window if you are using vs code.
+4. Create a .spell file anywhere on your device, and run it by putting this into powershell:
 ```
     interpret <filename>.spell
 ```

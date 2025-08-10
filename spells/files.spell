@@ -1,5 +1,6 @@
 #WARING TO FUTURE MAGES: This spell is too powerful for mere mortals to wield.
-unseal the scroll itself from "files.spell"
+speak the name of files to be files.spell
+unseal the scroll itself from files
 reveal the truth of itself
-by quill of eternity let the tome of "rebirth.spell" be born etched in itself and sealed in flame
-extend the infinite scroll of "files.spell" with itself that its verses may never cease
+#I did not intend for this spell when I wrote this syntax.
+extend the infinite scroll of files with itself that its verses may never cease

@@ -1,5 +1,6 @@
-itselffiled = open("files.spell")
+files = "files.spell"
+itselffiled = open(files)
 itself = itselffiled.read()
 print(itself)
-with open("files.spell", 'a') as f:
+with open(files, 'a') as f:
     f.write(itself)

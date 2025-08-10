@@ -48,7 +48,7 @@ PATTERNS = [
     # --- Loops ---
     (re.compile(r"chant upon (.+) each soul called (\w+)", re.IGNORECASE), "parse_for"),
     (re.compile(r"sustain the chant while (.+) holds true", re.IGNORECASE), "parse_while"),
-    (re.compile(r"scatter the chant to winds of finality", re.IGNORECASE), "parse_break"),
+    (re.compile(r"scatter the chant to the winds of finality", re.IGNORECASE), "parse_break"),
     (re.compile(r"pass over this soul in silence", re.IGNORECASE), "parse_continue"),
 
     # --- Lists ---
