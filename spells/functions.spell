@@ -1,12 +1,11 @@
 # Define a ritual to add two numbers
-inscribe ritual add with startith b
+inscribe ritual add with startith and b
     let result be startith
-    return e to the aether
 close the incantation
 
 # Define a ritual to greet a user
 inscribe ritual greet with name
-    let the spell echo: "Hello"
+    let the spell echo "Hello"
     reveal the truth of name
 close the incantation
 
@@ -22,7 +21,7 @@ inscribe ritual inspection with mana
 close the incantation
 
 # Call the add function and print the result
-let sum be invoke the ritual of add offering 7 and 5
+summon sum as the spirits from the ritual of add offering 7 and 5
 reveal the truth of sum
 
 # Call the greeting function

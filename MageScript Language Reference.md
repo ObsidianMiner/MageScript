@@ -53,6 +53,7 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 |-----------------------------------------------------|-----------------------------|---------------------------------|
 | `Inscribe ritual [name] with [param] and [param2]` | Define function              | `def name(param, param2):`       |
 | `Invoke the ritual of [name], offering [arg] and [arg2]`      | Call function     | `name(args)`          |
+| `summon [value] as the spirits from the ritual of [name] offering [arg] and [arg2]` | Call function with return | `value = name(args)` |
 | `Return [value] to the aether`                       | Return statement           | `return value`                 |
 | `Close the incantation`                              | End function block         | Dedent block                   |
 | `Share [name] with the spirits`                      | Get Global Variable        | `global name`                   |

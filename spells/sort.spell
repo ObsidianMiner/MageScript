@@ -11,7 +11,7 @@ Conjure an empty tome called chosen
 speak the name of fire to be fire
 speak the name of water to be water
 
-chant upon the essences each soul called e
+chant upon essences each soul called e
     if fate whispers e mirrors fire
         add e to the pages of chosen
     else if fate shifts e mirrors water
@@ -19,6 +19,6 @@ chant upon the essences each soul called e
     let the omen pass
 complete the chant
 
-chant upon the chosen each soul called e
+chant upon chosen each soul called e
     reveal the truth of e
 complete the chant

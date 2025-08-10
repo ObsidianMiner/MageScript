@@ -8,7 +8,7 @@ PATTERNS = [
     (re.compile(r"return (.+) to the aether", re.IGNORECASE), "parse_return"),
     (re.compile(r"invoke the ritual of (\w+)(?: offering (.+))?", re.IGNORECASE), "parse_function_call"),
     (re.compile(r"invoke the great rite of (\w+)(?: and offer (.+) as tribute to awaken its arcane design)?", re.IGNORECASE), "parse_function_call"),
-    (re.compile(r"summon (.+) as the spirits from the ritual of (\w+)(?: offering (\S+))?", re.IGNORECASE), "parse_function_call_with_output"),
+    (re.compile(r"summon (.+) as the spirits from the ritual of (\w+)(?: offering (.+))?", re.IGNORECASE), "parse_function_call_with_output"),
 
     # --- Files ---
     (re.compile(r"unseal the scroll (\w+) from (.+)", re.IGNORECASE), "parse_read_file"),
@@ -38,7 +38,7 @@ PATTERNS = [
 
     # --- Output ---
     (re.compile(r"reveal the truth of (.+)", re.IGNORECASE), "parse_print"),
-    (re.compile(r'let the spell echo:\s*"(.*)"', re.IGNORECASE), "parse_print_string"),
+    (re.compile(r'let the spell echo\s*"(.*)"', re.IGNORECASE), "parse_print_string"),
 
     # --- Conditionals ---
     (re.compile(r"if fate whispers (.+)", re.IGNORECASE), "parse_if"),
