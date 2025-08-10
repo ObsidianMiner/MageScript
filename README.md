@@ -6,6 +6,15 @@ A dumb programming language where you have to speak everything out loud like a w
 - Automatically installs Python if it's not already installed.  
 - Use the interpret command in PowerShell to interpret and run .spell files. Otherwise, simply run interpret.py.
 
+## How to use
+
+1. Run setup.bat
+    - installs python, and "interpret" powershell command
+2. Check out reference spells, and MageScript Language Reference.md
+3. Create a .spell file anywhere on your device, and run it by putting this into powershell:
+```
+    interpret <filename>.spell
+```
 ## Example .spell file:
 ```pickle.spell
 #Prints all pickles in the list of pickles.

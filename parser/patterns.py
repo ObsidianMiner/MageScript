@@ -7,6 +7,14 @@ PATTERNS = [
     (re.compile(r"inscribe ritual (\w+)(?: with (.+))?", re.IGNORECASE), "parse_function_def"),
     (re.compile(r"return (.+) to the aether", re.IGNORECASE), "parse_return"),
     (re.compile(r"invoke the ritual of (\w+)(?: offering (.+))?", re.IGNORECASE), "parse_function_call"),
+    (re.compile(r"invoke the great rite of (\w+)(?: and offer (.+) as tribute to awaken its arcane design)?", re.IGNORECASE), "parse_function_call"),
+    (re.compile(r"summon (.+) as the spirits from the ritual of (\w+)(?: offering (\S+))?", re.IGNORECASE), "parse_function_call_with_output"),
+
+    # --- Files ---
+    (re.compile(r"unseal the scroll (\w+) from (.+)", re.IGNORECASE), "parse_read_file"),
+    (re.compile(r"by quill of eternity let the tome of (.+) be born etched in (\w+) and sealed in flame", re.IGNORECASE), "parse_write_file"),
+    (re.compile(r"extend the infinite scroll of (.+) with (\w+) that its verses may never cease", re.IGNORECASE), "parse_append_file"),
+    (re.compile(r"purge the chronicle of (.+) from the vault of aeons that even the gods forget it once was", re.IGNORECASE), "parse_delete_file"),
 
     # --- Type Casting ---
     (re.compile(r"conjure the phrase\b\s+(\w+)\s+\busing\b\s+(.+)", re.IGNORECASE), "parse_join_strings"),
@@ -24,6 +32,9 @@ PATTERNS = [
     (re.compile(r"empower\s+(\w+)\s+by\s+(.+)", re.IGNORECASE), "parse_empower"),
     (re.compile(r"drain\s+(\w+)\s+by\s+(.+)", re.IGNORECASE), "parse_drain"),
     (re.compile(r"transmute\s+(\w+)\s+with\s+(.+)", re.IGNORECASE), "parse_transmute"),
+    (re.compile(r"enfold\s+(\w+)\s+with the multiplicative power of\s+(.+)", re.IGNORECASE), "parse_multiply"),
+    (re.compile(r"divide the soul of\s+(\w+)\s+by the decree of\s+(.+)", re.IGNORECASE), "parse_divide"),
+    (re.compile(r"mark\s+(\w+)\s+with the remainder after striking by\s+(.+)", re.IGNORECASE), "parse_modulus"),
 
     # --- Output ---
     (re.compile(r"reveal the truth of (.+)", re.IGNORECASE), "parse_print"),
@@ -37,6 +48,8 @@ PATTERNS = [
     # --- Loops ---
     (re.compile(r"chant upon (.+) each soul called (\w+)", re.IGNORECASE), "parse_for"),
     (re.compile(r"sustain the chant while (.+) holds true", re.IGNORECASE), "parse_while"),
+    (re.compile(r"scatter the chant to winds of finality", re.IGNORECASE), "parse_break"),
+    (re.compile(r"pass over this soul in silence", re.IGNORECASE), "parse_continue"),
 
     # --- Lists ---
     (re.compile(r"conjure an empty tome called (\w+)", re.IGNORECASE), "parse_list_conjure"),

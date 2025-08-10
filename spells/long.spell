@@ -7,7 +7,7 @@ reveal the truth of "initiating spell test..."
 
 if fate whispers power wanes below 50
     reveal the truth of "power is below half."
-else, when all omens fail
+else when all omens fail
     reveal the truth of "power is strong."
 let the omen pass
 
@@ -36,7 +36,7 @@ inscribe ritual greet with person
 close the incantation
 
 invoke the ritual of greet offering "traveler"
-invoke the rutual of greet offering "s"
+invoke the ritual of greet offering "s"
 
 seal the spell
 so it is written.

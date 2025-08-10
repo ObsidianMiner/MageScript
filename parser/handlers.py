@@ -23,6 +23,18 @@ class Handlers:
     def parse_drain(self, name, value):
         py_line = f"{name} -= {self.expr_clean(value)}"
         self.py_lines.append(self.indent() + py_line)
+    
+    def parse_divide(self, name, value):
+        py_line = f"{name} /= {self.expr_clean(value)}"
+        self.py_lines.append(self.indent() + py_line)
+    
+    def parse_multiply(self, name, value):
+        py_line = f"{name} *= {self.expr_clean(value)}"
+        self.py_lines.append(self.indent() + py_line)
+    
+    def parse_modulus(self, name, value):
+        py_line = f"{name} %= {self.expr_clean(value)}"
+        self.py_lines.append(self.indent() + py_line)
 
     def parse_transmute(self, name, value):
         py_line = f"{name} = {self.expr_clean(value)}"
@@ -50,6 +62,42 @@ class Handlers:
         params = params or ""
         params_clean = ", ".join(p.strip() for p in params.split('and')) if params else ""
         py_line = f"{name}({params_clean})"
+        self.py_lines.append(self.indent() + py_line)
+    
+    def parse_function_call_with_output(self, outputName, name, params):
+        params = params or ""
+        params_clean = ", ".join(p.strip() for p in params.split('and')) if params else ""
+        py_line = f"{outputName} = {name}({params_clean})"
+        self.py_lines.append(self.indent() + py_line)
+
+    def parse_read_file(self, varName, path):
+        py_line = f"{varName + "filed"} = open({path})"
+        self.py_lines.append(self.indent() + py_line)
+        sec_py_line = f"{varName} = {varName + "filed"}.read()"
+        self.py_lines.append(self.indent() + sec_py_line)
+
+    def parse_write_file(self, path, name):
+        py_line = f"with open({path}, 'w') as f:"
+        self.py_lines.append(self.indent() + py_line)
+        sec_py_line = self.indent() + f"    f.write({name})"
+        self.py_lines.append(sec_py_line)
+    
+    def parse_append_file(self, path, name):
+        py_line = f"with open({path}, 'a') as f:"
+        self.py_lines.append(self.indent() + py_line)
+        sec_py_line = self.indent() + f"    f.write({name})"
+        self.py_lines.append(sec_py_line)
+
+    def parse_break(self):
+        py_line = "break"
+        self.py_lines.append(self.indent() + py_line)
+
+    def parse_continue(self):
+        py_line = "continue"
+        self.py_lines.append(self.indent() + py_line)
+    
+    def parse_delete_file(self, path):
+        py_line = f"import os\nos.remove({path})"
         self.py_lines.append(self.indent() + py_line)
 
     def parse_join_strings(self, name, args):

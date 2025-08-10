@@ -23,4 +23,5 @@ def greet(person):
     message = "greetings, " + person
     print(message)
     return message
-greet("Traveler")
+greet("traveler")
+greet("s")
