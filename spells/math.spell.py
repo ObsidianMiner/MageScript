@@ -14,3 +14,5 @@ num /= 4
 print(num)
 num %= 10
 print(num)
+quick = num  *  10
+print(quick)

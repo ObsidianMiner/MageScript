@@ -19,3 +19,6 @@ reveal the truth of num
 
 mark num with the remainder after striking by 10
 reveal the truth of num
+
+let quick be num times 10
+reveal the truth of quick

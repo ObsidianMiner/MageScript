@@ -3,6 +3,7 @@
 import re
 from parser.patterns import PATTERNS
 from parser.handlers import Handlers
+from parser.preproc import MageScriptPreprocessor
 
 class MageScriptParser:
     def __init__(self):
@@ -24,12 +25,14 @@ class MageScriptParser:
         return "    " * self.indent_level
 
     def parse(self, mage_script):
+        
+
         self.python_lines = []
         self.indent_level = 0
         self.ended = False
         self.block_stack = []
 
-        lines = mage_script.strip().split('\n')
+        lines = MageScriptPreprocessor(mage_script.strip().split('\n')).spellLines
 
         for lineno, line in enumerate(lines, 1):
             line = line.strip()
