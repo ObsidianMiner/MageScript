@@ -6,133 +6,71 @@ class Handlers:
         self.indent = parser.indent
         self.py_lines = parser.python_lines
 
-    # === Handlers ===
+    # ==========================
+    # Variable Declarations & Assignment
+    # ==========================
     def parse_let(self, name, value):
-        py_line = f"{name} = {self.expr_clean(value)}"
-        self.py_lines.append(self.indent() + py_line)
+        self.py_lines.append(self.indent() + f"{name} = {self.expr_clean(value)}")
 
-        
     def parse_let_string(self, name, value):
-        py_line = f"{name} = \"{self.expr_clean(value)}\""
-        self.py_lines.append(self.indent() + py_line)
-
-    def parse_empower(self, name, value):
-        py_line = f"{name} += {self.expr_clean(value)}"
-        self.py_lines.append(self.indent() + py_line)
-
-    def parse_drain(self, name, value):
-        py_line = f"{name} -= {self.expr_clean(value)}"
-        self.py_lines.append(self.indent() + py_line)
-    
-    def parse_divide(self, name, value):
-        py_line = f"{name} /= {self.expr_clean(value)}"
-        self.py_lines.append(self.indent() + py_line)
-    
-    def parse_multiply(self, name, value):
-        py_line = f"{name} *= {self.expr_clean(value)}"
-        self.py_lines.append(self.indent() + py_line)
-    
-    def parse_modulus(self, name, value):
-        py_line = f"{name} %= {self.expr_clean(value)}"
-        self.py_lines.append(self.indent() + py_line)
+        self.py_lines.append(self.indent() + f"{name} = \"{self.expr_clean(value)}\"")
 
     def parse_transmute(self, name, value):
-        py_line = f"{name} = {self.expr_clean(value)}"
-        self.py_lines.append(self.indent() + py_line)
-
-    def parse_print(self, value):
-        py_line = f"print({self.expr_clean(value)})"
-        self.py_lines.append(self.indent() + py_line)
-
-    def parse_print_string(self, message):
-        # Escape quotes properly
-        safe_message = message.replace('"', '\\"')
-        py_line = f'print("{safe_message}")'
-        self.py_lines.append(self.indent() + py_line)
-
-    def parse_return(self, value):
-        py_line = f"return {self.expr_clean(value)}"
-        self.py_lines.append(self.indent() + py_line)
+        self.py_lines.append(self.indent() + f"{name} = {self.expr_clean(value)}")
 
     def parse_global(self, value):
-        py_line = f"global {self.expr_clean(value)}"
-        self.py_lines.append(self.indent() + py_line)
+        self.py_lines.append(self.indent() + f"global {self.expr_clean(value)}")
 
-    def parse_function_call(self, name, params):
-        params = params or ""
-        params_clean = ", ".join(p.strip() for p in params.split('and')) if params else ""
-        py_line = f"{name}({params_clean})"
-        self.py_lines.append(self.indent() + py_line)
-    
-    def parse_function_call_with_output(self, outputName, name, params):
-        params = params or ""
-        params_clean = ", ".join(p.strip() for p in params.split('and')) if params else ""
-        py_line = f"{outputName} = {name}({params_clean})"
-        self.py_lines.append(self.indent() + py_line)
+    # ==========================
+    # Reassignment & Math Operations
+    # ==========================
+    def parse_empower(self, name, value):
+        self.py_lines.append(self.indent() + f"{name} += {self.expr_clean(value)}")
 
-    def parse_read_file(self, varName, path):
-        py_line = f"{varName + "filed"} = open({path})"
-        self.py_lines.append(self.indent() + py_line)
-        sec_py_line = f"{varName} = {varName + "filed"}.read()"
-        self.py_lines.append(self.indent() + sec_py_line)
+    def parse_drain(self, name, value):
+        self.py_lines.append(self.indent() + f"{name} -= {self.expr_clean(value)}")
 
-    def parse_write_file(self, path, name):
-        py_line = f"with open({path}, 'w') as f:"
-        self.py_lines.append(self.indent() + py_line)
-        sec_py_line = self.indent() + f"    f.write({name})"
-        self.py_lines.append(sec_py_line)
-    
-    def parse_append_file(self, path, name):
-        py_line = f"with open({path}, 'a') as f:"
-        self.py_lines.append(self.indent() + py_line)
-        sec_py_line = self.indent() + f"    f.write({name})"
-        self.py_lines.append(sec_py_line)
+    def parse_divide(self, name, value):
+        self.py_lines.append(self.indent() + f"{name} /= {self.expr_clean(value)}")
+
+    def parse_multiply(self, name, value):
+        self.py_lines.append(self.indent() + f"{name} *= {self.expr_clean(value)}")
+
+    def parse_modulus(self, name, value):
+        self.py_lines.append(self.indent() + f"{name} %= {self.expr_clean(value)}")
+
+    # ==========================
+    # Output & Input
+    # ==========================
+    def parse_print(self, value):
+        self.py_lines.append(self.indent() + f"print({self.expr_clean(value)})")
+
+    def parse_print_string(self, message):
+        safe_message = message.replace('"', '\\"')
+        self.py_lines.append(self.indent() + f'print("{safe_message}")')
+
+    # ==========================
+    # Loops & Flow Control
+    # ==========================
+    def parse_for(self, iterable, item):
+        self.py_lines.append(self.indent() + f"for {item} in {self.expr_clean(iterable)}:")
+        self.parser.indent_level += 1
+        self.parser.block_stack.append('loop')
+
+    def parse_while(self, condition):
+        self.py_lines.append(self.indent() + f"while {self.condition_clean(condition)}:")
+        self.parser.indent_level += 1
+        self.parser.block_stack.append('loop')
 
     def parse_break(self):
-        py_line = "break"
-        self.py_lines.append(self.indent() + py_line)
+        self.py_lines.append(self.indent() + "break")
 
     def parse_continue(self):
-        py_line = "continue"
-        self.py_lines.append(self.indent() + py_line)
-    
-    def parse_delete_file(self, path):
-        py_line = f"import os\nos.remove({path})"
-        self.py_lines.append(self.indent() + py_line)
+        self.py_lines.append(self.indent() + "continue")
 
-    def parse_join_strings(self, name, args):
-        args = args or ""
-        parts = [part.strip() for part in args.split('and') if part.strip()]
-        joined = " + ".join(f"str({part})" for part in parts)
-        self.py_lines.append(self.indent() + f"{name} = {joined}")
-
-    def parse_cast_string(self, name, value):
-        py_line = f"{name} = str({self.expr_clean(value)})"
-        self.py_lines.append(self.indent() + py_line)
-
-    def parse_function_def(self, name, params):
-        params = params or ""
-        params_clean = ", ".join(p.strip() for p in params.split('and')) if params else ""
-        self.py_lines.append(self.indent() + f"def {name}({params_clean}):")
-        self.parser.indent_level += 1
-        self.parser.block_stack.append('function')
-
-    def parse_list_conjure(self, name):
-        py_line = f"{name} = []"
-        self.py_lines.append(self.indent() + py_line)
-
-    def parse_list_add(self, value, name):
-        py_line = f"{name}.append({self.expr_clean(value)})"
-        self.py_lines.append(self.indent() + py_line)
-    
-    def parse_list_add_string(self, value, name):
-        py_line = f"{name}.append(\"{self.expr_clean(value)}\")"
-        self.py_lines.append(self.indent() + py_line)
-
-    def parse_length(self, var_name, list_name):
-        py_line = f"{var_name} = len({list_name})"
-        self.py_lines.append(self.indent() + py_line)
-
+    # ==========================
+    # Conditionals
+    # ==========================
     def parse_if(self, condition):
         self.py_lines.append(self.indent() + f"if {self.condition_clean(condition)}:")
         self.parser.indent_level += 1
@@ -152,15 +90,109 @@ class Handlers:
         self.py_lines.append(self.indent() + "else:")
         self.parser.indent_level += 1
 
-    def parse_for(self, iterable, item):
-        self.py_lines.append(self.indent() + f"for {item} in {self.expr_clean(iterable)}:")
+    # ==========================
+    # Functions (Rituals)
+    # ==========================
+    def parse_function_def(self, name, params):
+        params = params or ""
+        params_clean = ", ".join(p.strip() for p in params.split('and'))
+        self.py_lines.append(self.indent() + f"def {name}({params_clean}):")
         self.parser.indent_level += 1
-        self.parser.block_stack.append('loop')
+        self.parser.block_stack.append('function')
 
-    def parse_while(self, condition):
-        self.py_lines.append(self.indent() + f"while {self.condition_clean(condition)}:")
+    def parse_function_call(self, name, params):
+        params = params or ""
+        params_clean = ", ".join(p.strip() for p in params.split('and'))
+        self.py_lines.append(self.indent() + f"{name}({params_clean})")
+
+    def parse_function_call_with_output(self, outputName, name, params):
+        params = params or ""
+        params_clean = ", ".join(p.strip() for p in params.split('and'))
+        self.py_lines.append(self.indent() + f"{outputName} = {name}({params_clean})")
+
+    def parse_return(self, value):
+        self.py_lines.append(self.indent() + f"return {self.expr_clean(value)}")
+
+    # ==========================
+    # Lists & Arrays (Tomes)
+    # ==========================
+    def parse_list_conjure(self, name):
+        self.py_lines.append(self.indent() + f"{name} = []")
+
+    def parse_list_add(self, value, name):
+        self.py_lines.append(self.indent() + f"{name}.append({self.expr_clean(value)})")
+
+    def parse_list_add_string(self, value, name):
+        self.py_lines.append(self.indent() + f"{name}.append(\"{self.expr_clean(value)}\")")
+
+    def parse_length(self, var_name, list_name):
+        self.py_lines.append(self.indent() + f"{var_name} = len({list_name})")
+
+    # ==========================
+    # Class (Scroll)
+    # ==========================
+
+    def parse_class_def(self, name):
+        self.py_lines.append(self.indent() + f"class {name}:")
         self.parser.indent_level += 1
-        self.parser.block_stack.append('loop')
+        self.parser.block_stack.append('class')
+        
+    def parse_inherited_class_def(self, name, parent_name):
+        self.py_lines.append(self.indent() + f"class {name}({parent_name}):")
+        self.parser.indent_level += 1
+        self.parser.block_stack.append('class')
+    
+    def parse_constructor_def(self):
+        # Add a constructor
+        self.py_lines.append(self.indent() + "def __init__(self):")
+        self.parser.indent_level += 1
+    
+    def parse_class_function_call(self, class_name, function_name, params):
+        params = params or ""
+        params_clean = ", ".join(p.strip() for p in params.split('and'))
+        self.py_lines.append(self.indent() + f"{class_name}.{function_name}({params_clean})")
+    
+    def parse_instantiate_class(self, instance_name, class_name):
+        self.py_lines.append(self.indent() + f"{instance_name} = {class_name}()")
+
+    # ==========================
+    # File Operations
+    # ==========================
+    def parse_read_file(self, varName, path):
+        file_var = varName + "filed"
+        self.py_lines.append(self.indent() + f"{file_var} = open({path})")
+        self.py_lines.append(self.indent() + f"{varName} = {file_var}.read()")
+
+    def parse_write_file(self, path, name):
+        self.py_lines.append(self.indent() + f"with open({path}, 'w') as f:")
+        self.py_lines.append(self.indent() + f"    f.write({name})")
+
+    def parse_append_file(self, path, name):
+        self.py_lines.append(self.indent() + f"with open({path}, 'a') as f:")
+        self.py_lines.append(self.indent() + f"    f.write({name})")
+
+    def parse_delete_file(self, path):
+        self.py_lines.append(self.indent() + f"import os\nos.remove({path})")
+
+    # ==========================
+    # String Operations
+    # ==========================
+    def parse_join_strings(self, name, args):
+        parts = [part.strip() for part in (args or "").split('and') if part.strip()]
+        joined = " + ".join(f"str({part})" for part in parts)
+        self.py_lines.append(self.indent() + f"{name} = {joined}")
+
+    def parse_cast_string(self, name, value):
+        self.py_lines.append(self.indent() + f"{name} = str({self.expr_clean(value)})")
+
+    # ==========================
+    # Imports
+    # ==========================
+    def parse_import(self, module):
+        self.py_lines.append(self.indent() + f"import {module}")
+
+    def parse_import_from_module(self, function, module):
+        self.py_lines.append(self.indent() + f"from {module} import {function}")
 
     # === New block close handlers ===
     def parse_close_function(self):

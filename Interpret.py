@@ -5,6 +5,28 @@ from parser.parser import MageScriptParser
 import os
 import sys
 
+class MageScriptInterpreter:
+    def interpret(self, scriptPath, write):
+        with open(scriptPath) as spellFile:
+            spellFileContents = spellFile.read()
+        parser = MageScriptParser()
+        python_code = parser.parse(spellFileContents)
+        if write:
+            spellPYName = scriptPath + ".py"
+            with open(spellPYName, "w") as f:
+                f.write(python_code)
+        return python_code
+        
+    def run_python_code(self, spellPYName):
+        original_cwd = os.getcwd()
+        spell_dir = os.path.dirname(os.path.abspath(spellPYName))
+        try:
+            os.chdir(spell_dir)
+            result = subprocess.run(["python3", spellPYName], capture_output=True, text=True)
+        finally:
+            os.chdir(original_cwd)
+        return result.stdout, result.stderr, result.returncode
+
 if __name__ == "__main__":
     spellName = None
     if(len(sys.argv) == 2):
@@ -12,18 +34,13 @@ if __name__ == "__main__":
     else:
         spellName = input("Spell Name: ")
     
-    spellFile = open(spellName)
-    sample_script = spellFile.read()
-
-    parser = MageScriptParser()
-    python_code = parser.parse(sample_script)
+    
+    interpreter = MageScriptInterpreter()
+    
+    python_code = interpreter.interpret(spellName, True)
     #print("Generated Python code:\n")
     #print(python_code)
 
-    spellPYName = spellName + ".py"
 
-    with open(spellPYName, "w") as f:
-        f.write(python_code)
-
-    os.chdir(os.path.dirname(os.path.abspath(spellPYName)))
-    subprocess.run(["python3", spellPYName])
+    interpreter.run_python_code(spellName + ".py")
+    

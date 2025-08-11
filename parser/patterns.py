@@ -23,6 +23,16 @@ PATTERNS = [
     # --- Length must be before let ---
     (re.compile(r"let (.+) be the length of (\w+)", re.IGNORECASE), "parse_length"),
 
+    # --- Importing ---
+    (re.compile(r"commune with the library of (.+)", re.IGNORECASE), "parse_import"),
+    (re.compile(r"summon (.+) from the library of (\w+)", re.IGNORECASE), "parse_import_from_module"),
+
+    # --- Classes (Abominations) ---
+    (re.compile(r"proclaim a (\w+) abomination named (\w+)", re.IGNORECASE), "parse_class_def"),
+    (re.compile(r"proclaim an (\w+) abomination named (\w+)", re.IGNORECASE), "parse_class_def"),
+    (re.compile(r"fuel the abomination with (.+)", re.IGNORECASE), "parse_constructor_def"),
+    (re.compile(r"birth an abomination of (.+) named (.+) fuled with (.+)", re.IGNORECASE), "parse_instantiate_class"),
+
     # --- Variable declarations ---
     (re.compile(r"let\s+(\w+)\s+be\s+(.+)", re.IGNORECASE), "parse_let"),
     (re.compile(r"speak the name of\s+(\w+)\s+to be\s+(.+)", re.IGNORECASE), "parse_let_string"),
