@@ -20,5 +20,5 @@ reveal the truth of num
 mark num with the remainder after striking by 10
 reveal the truth of num
 
-let quick be num times 10
+let quick be num with the multiplicative power within 10
 reveal the truth of quick

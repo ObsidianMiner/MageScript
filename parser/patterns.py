@@ -4,16 +4,16 @@ import re
 PATTERNS = [
 
     # --- Functions ---
-    (re.compile(r"inscribe ritual (\w+)(?: with (.+))?", re.IGNORECASE), "parse_function_def"),
+    (re.compile(r"inscribe ritual (\S+)(?: with (.+))?", re.IGNORECASE), "parse_function_def"),
     (re.compile(r"return (.+) to the aether", re.IGNORECASE), "parse_return"),
-    (re.compile(r"invoke the ritual of (\w+)(?: offering (.+))?", re.IGNORECASE), "parse_function_call"),
-    (re.compile(r"invoke the great rite of (\w+)(?: and offer (.+) as tribute to awaken its arcane design)?", re.IGNORECASE), "parse_function_call"),
-    (re.compile(r"summon (.+) as the spirits from the ritual of (\w+)(?: offering (.+))?", re.IGNORECASE), "parse_function_call_with_output"),
+    (re.compile(r"invoke the ritual of (\S+)(?: offering (.+))?", re.IGNORECASE), "parse_function_call"),
+    (re.compile(r"summon (\S+) as the spirits from the ritual of (.+?)(?: offering (.+))?$", re.IGNORECASE), "parse_function_call_with_output"),
+    (re.compile(r"invoke the great rite of (\S+)(?: and offer (.+) as tribute to awaken its arcane design)?", re.IGNORECASE), "parse_function_call"),
 
     # --- Files ---
-    (re.compile(r"unseal the scroll (\w+) from (.+)", re.IGNORECASE), "parse_read_file"),
-    (re.compile(r"by quill of eternity let the tome of (.+) be born etched in (\w+) and sealed in flame", re.IGNORECASE), "parse_write_file"),
-    (re.compile(r"extend the infinite scroll of (.+) with (\w+) that its verses may never cease", re.IGNORECASE), "parse_append_file"),
+    (re.compile(r"unseal the scroll (\S+) from (.+)", re.IGNORECASE), "parse_read_file"),
+    (re.compile(r"by quill of eternity let the tome of (.+) be born etched in (\S+) and sealed in flame", re.IGNORECASE), "parse_write_file"),
+    (re.compile(r"extend the infinite scroll of (.+) with (\S+) that its verses may never cease", re.IGNORECASE), "parse_append_file"),
     (re.compile(r"purge the chronicle of (.+) from the vault of aeons that even the gods forget it once was", re.IGNORECASE), "parse_delete_file"),
 
     # --- Type Casting ---
@@ -28,15 +28,17 @@ PATTERNS = [
     (re.compile(r"summon (.+) from the library of (\w+)", re.IGNORECASE), "parse_import_from_module"),
 
     # --- Classes (Abominations) ---
-    (re.compile(r"proclaim a (\w+) abomination named (\w+)", re.IGNORECASE), "parse_class_def"),
-    (re.compile(r"proclaim an (\w+) abomination named (\w+)", re.IGNORECASE), "parse_class_def"),
-    (re.compile(r"fuel the abomination with (.+)", re.IGNORECASE), "parse_constructor_def"),
-    (re.compile(r"birth an abomination of (.+) named (.+) fuled with (.+)", re.IGNORECASE), "parse_instantiate_class"),
+    (re.compile(r"proclaim a (\w+) abomination", re.IGNORECASE), "parse_class_def"),
+    (re.compile(r"proclaim an (\w+) abomination feasting upon the bones of (\w+)", re.IGNORECASE), "parse_inherited_class_def"),
+    (re.compile(r"fuel the abomination with (.+)", re.IGNORECASE), "parse_constructor_def_with_params"),
+    (re.compile(r"cometh the abomination awakens", re.IGNORECASE), "parse_constructor_def"),
+    (re.compile(r"birth an abomination of (.+) named (.+) fuled with (.+)", re.IGNORECASE), "parse_instantiate_class_with_params"),
+    (re.compile(r"birth an abomination of (.+) named (.+)", re.IGNORECASE), "parse_instantiate_class"),
 
     # --- Variable declarations ---
-    (re.compile(r"let\s+(\w+)\s+be\s+(.+)", re.IGNORECASE), "parse_let"),
-    (re.compile(r"speak the name of\s+(\w+)\s+to be\s+(.+)", re.IGNORECASE), "parse_let_string"),
-    (re.compile(r"share (\w+) with the spirts", re.IGNORECASE), "parse_global"),
+    (re.compile(r"let\s+(\S+)\s+be\s+(.+)", re.IGNORECASE), "parse_let"),
+    (re.compile(r"speak the name of\s+(\S+)\s+to be\s+(.+)", re.IGNORECASE), "parse_let_string"),
+    (re.compile(r"share (\S+) with the spirts", re.IGNORECASE), "parse_global"),
 
     # --- Reassignment ---
     (re.compile(r"empower\s+(\w+)\s+by\s+(.+)", re.IGNORECASE), "parse_empower"),
@@ -49,6 +51,11 @@ PATTERNS = [
     # --- Output ---
     (re.compile(r"reveal the truth of (.+)", re.IGNORECASE), "parse_print"),
     (re.compile(r'let the spell echo\s*"(.*)"', re.IGNORECASE), "parse_print_string"),
+    (re.compile(r"whisper to the void (.+)", re.IGNORECASE), "parse_print_string"),
+
+    # --- Input ---
+    (re.compile(r"ask the stars for (\S+) saying (.+)", re.IGNORECASE), "parse_input"),
+    (re.compile(r"seek the ether for (\S+) with the words (.+)", re.IGNORECASE), "parse_input"),
 
     # --- Conditionals ---
     (re.compile(r"if fate whispers (.+)", re.IGNORECASE), "parse_if"),
@@ -72,6 +79,7 @@ PATTERNS = [
     (re.compile(r"close the incantation", re.IGNORECASE), "parse_close_function"),
     (re.compile(r"let the omen pass", re.IGNORECASE), "parse_close_if"),
     (re.compile(r"complete the chant", re.IGNORECASE), "parse_close_loop"),
+    (re.compile(r"vanish  self", re.IGNORECASE), "parse_close_class"),
     (re.compile(r"seal the spell", re.IGNORECASE), "parse_close_any"),
 
     # --- End spell (compile trigger) ---

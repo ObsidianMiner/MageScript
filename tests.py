@@ -1,8 +1,12 @@
 import unittest
 import os
 import io
+import random
 
 from Interpret import MageScriptInterpreter
+
+from unittest.mock import patch
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SPELLS_DIR = os.path.join(BASE_DIR, "spells")
@@ -19,7 +23,7 @@ def generate_spell_test(spell_filename):
         # Run and capture output
         interpreter = MageScriptInterpreter()
         interpreter.interpret(spell_path, True) # Creates spell_path.py
-        stdout, stderr, returnCode = interpreter.run_python_code(spell_path + ".py")
+        stdout, stderr, returnCode = interpreter.run_python_code(spell_path + ".py", False, os.path.abspath("testEnviorment.py"))
 
         # Check or create expected output
         if not os.path.exists(expected_path) or getattr(self, "update_snapshots", False):

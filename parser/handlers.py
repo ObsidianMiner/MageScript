@@ -48,6 +48,15 @@ class Handlers:
     def parse_print_string(self, message):
         safe_message = message.replace('"', '\\"')
         self.py_lines.append(self.indent() + f'print("{safe_message}")')
+    
+    def parse_input(self, output, message):
+        safe_message = message.replace('"', '\\"')
+        self.py_lines.append(self.indent() + "import sys")
+        self.py_lines.append(self.indent() + f'print("{str(safe_message)} : ", end=\'\', flush=True)')
+        self.py_lines.append(self.indent() + "sys.stdout.flush()")
+        self.py_lines.append(self.indent() + f'{output} = input()')
+        
+        
 
     # ==========================
     # Loops & Flow Control
@@ -129,7 +138,7 @@ class Handlers:
         self.py_lines.append(self.indent() + f"{var_name} = len({list_name})")
 
     # ==========================
-    # Class (Scroll)
+    # Class (Abomination)
     # ==========================
 
     def parse_class_def(self, name):
@@ -141,19 +150,31 @@ class Handlers:
         self.py_lines.append(self.indent() + f"class {name}({parent_name}):")
         self.parser.indent_level += 1
         self.parser.block_stack.append('class')
-    
     def parse_constructor_def(self):
-        # Add a constructor
-        self.py_lines.append(self.indent() + "def __init__(self):")
+        self.py_lines.append(self.indent() + f"def __init__(self):")
         self.parser.indent_level += 1
+        self.parser.block_stack.append('function')
+
+    def parse_constructor_def_with_params(self, params):
+        params = params or ""
+        params_clean = ", ".join(p.strip() for p in params.split('and'))
+        self.py_lines.append(self.indent() + f"def __init__(self,{params_clean}):")
+        self.parser.indent_level += 1
+        self.parser.block_stack.append('function')
+
     
     def parse_class_function_call(self, class_name, function_name, params):
         params = params or ""
         params_clean = ", ".join(p.strip() for p in params.split('and'))
         self.py_lines.append(self.indent() + f"{class_name}.{function_name}({params_clean})")
     
-    def parse_instantiate_class(self, instance_name, class_name):
+    def parse_instantiate_class(self, class_name, instance_name):
         self.py_lines.append(self.indent() + f"{instance_name} = {class_name}()")
+    
+    def parse_instantiate_class_with_params(self, class_name, instance_name, params):
+        params = params or ""
+        params_clean = ", ".join(p.strip() for p in params.split('and'))
+        self.py_lines.append(self.indent() + f"{instance_name} = {class_name}(params_clean)")
 
     # ==========================
     # File Operations
@@ -203,7 +224,10 @@ class Handlers:
 
     def parse_close_loop(self):
         self.close_block('loop')
-
+    
+    def parse_close_class(self):
+            self.close_block('class')
+    
     def parse_close_any(self):
         # Close the most recent block regardless of type
         if self.parser.block_stack:

@@ -1,4 +1,4 @@
-# ✦ MageScript Language Specification & Reference (v3.0) ✦
+# ✦ MageScript Language Specification & Reference (v4.0) ✦
 > *"Speak the code as if you summon the arcane."*
 
 
@@ -16,7 +16,6 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 |------------------------------------------|------------------------------|---------------------------|
 | `Let [name] be [value]`                   | Declare or assign variable   | `name = value`             |
 | `Speak the name of [name] to be [value]` | Assign string value          | `name = "value"`           |
-| `Engrave [name] with the essence of [value]` | (Suggested alternative)   | `name = value`             |
 
 ### 2. Reassignment
 
@@ -29,7 +28,20 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `Divide the soul of [name] by the decree of [value]`   | Divide          | `name -= value`      |
 | `Mark [name] with the remainder after striking by [value]`   | Modulo          | `name -= value`      |
 
-### 3. Lists & Arrays
+### 3. Arithmetic
+
+| Phrase                                | Meaning              | Python Equivalent |
+|----------------------------------------|-----------------------|-------------------|
+| `with the multiplicative power of`     | Multiply              | `*`               |
+| `joined with`                          | Add                   | `+`               |
+| `drained of`                           | Subtract              | `-`               |
+| `striked by`                           | Divide                | `/`               |
+| `modulo`                               | Modulo (remainder)    | `%`               |
+| `to the power of`                      | Exponentiation        | `**`              |
+
+> These phrases allow chaining complex expressions within natural, spoken-like sentences.
+
+### 4. Lists & Arrays
 
 | Phrase                            | Meaning                      | Python Equivalent     |
 |-----------------------------------|------------------------------|----------------------|
@@ -38,7 +50,7 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `Call forth the word [value] to the pages of [name]` | Append string    | `name.append("value")`|
 | `Let [name] be the length of [list]`  | Get list length          | `name = len(list)`    |
 
-### 4. Loops
+### 5. Loops (Chants)
 
 | Phrase                                           | Meaning            | Python Equivalent          |
 |--------------------------------------------------|--------------------|---------------------------|
@@ -47,7 +59,7 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `scatter the chant to the winds of finality`         | break              | `break`                     |
 | `pass over this soul in silence`                 | continue           | `continue`                |
 
-### 5. Functions (Rituals)
+### 6. Functions (Rituals)
 
 | Phrase                                               | Meaning                    | Python Equivalent              |
 |-----------------------------------------------------|-----------------------------|---------------------------------|
@@ -58,13 +70,13 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `Close the incantation`                              | End function block         | Dedent block                   |
 | `Share [name] with the spirits`                      | Get Global Variable        | `global name`                   |
 
-### 6. Conditionals (Fate)
+### 7. Conditionals (Fate)
 
 | Phrase                                  | Meaning             | Python Equivalent          |
 |-----------------------------------------|---------------------|---------------------------|
 | `If fate whispers [condition]`           | if statement        | `if condition:`            |
 | `Else if fate shifts [condition]`        | elif statement      | `elif condition:`          |
-| `Else, when all omens fail`               | else statement      | `else:`                    |
+| `Else when all omens fail`               | else statement      | `else:`                    |
 | `Let the omen pass`                      | End conditional block | Dedent block             |
 
 #### Comparisons in conditions
@@ -77,18 +89,19 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 
 ---
 
-### 7. Output & Input
+### 8. Output & Input
 
 | Phrase                                   | Meaning         | Python Equivalent       |
 |------------------------------------------|-----------------|-------------------------|
 | `Reveal the truth of [value]`            | Print variable  | `print(value)`          |
-| `Let the spell echo: "[message]"`        | Print string    | `print("message")`      |
-| `Whisper to the void: "[prompt]"`        | Input prompt    | `input("prompt")`       |
-| `Query the ether: "[prompt]"`            | Input prompt    | `input("prompt")`       |
+| `Let the spell echo [message]`        | Print string    | `print("message")`      |
+| `Whisper to the void [message]`        | Print string    | `print("message")`       |
+| `ask the stars for [value] saying [prompt]`            | Input prompt    | `value = input("prompt")`|
+| `seek the ether for [value] with the words [prompt]`            | Input prompt    | `value = input("prompt")`|
 
 ---
 
-### 8. Block Closures & Spell Endings
+### 9. Block Closures & Spell Endings
 
 | Phrase                        | Meaning                  |
 |-------------------------------|--------------------------|
@@ -96,19 +109,20 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `Let the omen pass`           | Close conditional block  |
 | `Complete the chant`          | Close loop block         |
 | `Seal the spell`              | Close any open block     |
+| `Vanish the beast`            | Close class block        |
 | `So it is written.`           | End spell & compile      |
 | `The spell is complete.`      | End spell & compile      |
 | `Thus concludes the incantation.` | End spell & compile  |
 | `Let it be done.`             | End spell & compile      |
 
-### 9. String Creation & Type Conversion
+### 10. String Creation & Type Conversion
 
 | Phrase                                   | Meaning         | Python Equivalent       |
 |------------------------------------------|-----------------|-------------------------|
 | `Conjure the phrase [name] using [parts...]`| Join elements as string  | `name = "a" + str(b) + "c"`          |
 | `Let [name] be the spelltext of [value]"`        | Cast to a string    | `name = str(value)`      |
 
-### 10. Filesystem
+### 11. Filesystem
 | Phrase                                                                | Meaning                     | Python Equivalent                           |
 |-------------------------------------------------------------------------------------|-----------------------------|---------------------------------------------|
 | `Unseal the scroll [varname] from [filename]`                                       | Read file into variable     | `varname = open(filename).read()`           |
@@ -117,17 +131,25 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `Purge the chronicle of [filename] from the vault of aeons that even the gods forget it once was` | Delete a file               | `os.remove(filename)`                       |
 reading line by line, checking if a file or directory exists, as well as creating directories is coming soon...
 
+### 12. Classes (Abominations)
+
+| Phrase                                                     | Meaning                      | Python Equivalent                          |
+|------------------------------------------------------------|------------------------------|--------------------------------------------|
+| `Proclaim a(n) [type] abomination`       | Define a class                | `class ClassName:`                          |
+| `Fuel the abomination with [param] and [param2]`            | Define the constructor (__init__) with parameters | `def __init__(self, param, param2):`         |
+| `Birth an abomination of [ClassName] named [instanceName] fueled with [args]` | Instantiate an object of a class with arguments | `instanceName = ClassName(args)`              |
+| `The beast`       | Referencing itself                | `self`                          |
 ---
 
 ## Code Structure & Parsing Notes
 
 - Indentation is managed via block stack.
-- Keywords are case-insensitive.
-- Flexible phrasing and filler words ignored unless in strings.
-- Comparisons and logical operators map from MageScript phrases to Python equivalents.
 - Block openers increase indentation; closers decrease it.
 - Error handling for mismatched block closures.
 - Functions are called rituals; variables are named magically.
+- Everything in mage script is lowercase except for strings.
+- You don't create string litterals via quotes ("), instead you use speak the name of
+- The language is meant to be spoken out loud so make sure to not include things that cannot be spoken as words.
 
 ## Example Reference Spells
 
@@ -141,7 +163,7 @@ reveal the truth of "initiating spell test..."
 
 if fate whispers power wanes below 50
     reveal the truth of "power is below half."
-else, when all omens fail
+else when all omens fail
     reveal the truth of "power is strong."
 let the omen pass
 
@@ -170,6 +192,7 @@ inscribe ritual greet with person
 close the incantation
 
 invoke the ritual of greet offering "traveler"
+invoke the ritual of greet offering "s"
 
 seal the spell
 so it is written.
