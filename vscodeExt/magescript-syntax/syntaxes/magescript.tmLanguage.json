@@ -73,6 +73,14 @@
           "end": "$"
         },
         {
+          "name": "meta.function.definition",
+          "begin": "\\bcometh the abomination awakens",
+          "beginCaptures": {
+            "1": { "name": "entity.name.function" }
+          },
+          "end": "$"
+        },
+        {
           "name": "meta.function.call",
           "begin": "\\binvoke the ritual of\\b\\s+(\\w+)",
           "beginCaptures": {
@@ -247,6 +255,18 @@
         {
           "name": "meta.operation.read",
           "begin": "\\bunseal the scroll\\b\\s+(\\w+)\\s+from\\s+",
+          "beginCaptures": {
+            "1": { "name": "variable" }
+          },
+          "end": "(?=\\s|$)",
+          "patterns": [
+            { "include": "#strings" },
+            { "include": "#variables" }
+          ]
+        },
+        {
+          "name": "meta.operation.read",
+          "begin": "\\bproclaim a\\b\\s+(\\w+)\\s+abomination\\s+",
           "beginCaptures": {
             "1": { "name": "variable" }
           },

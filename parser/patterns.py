@@ -19,8 +19,8 @@ PATTERNS = [
     (re.compile(r"unveil the scroll (.+) line by line and bind its verses to (\S+)", re.IGNORECASE), "parse_read_lines"),
     (re.compile(r"the aether speaks (.+) does not lie in this realm", re.IGNORECASE), "parse_file_or_path_exists"),
     (re.compile(r"by the will of creation carve the sanctum (\S+) from the bones of the world", re.IGNORECASE), "parse_create_dir"),
-    (re.compile(r"chant upon the verses of (\S+) each line known as (\S+)", re.IGNORECASE), "parse_file_exists"),
-    (re.compile(r"call forth the echos of the sanctum of (\S+) and seal them to (\S+)", re.IGNORECASE), "parse_for_each_line"),
+    (re.compile(r"chant upon the verses of (\S+) each line known as (\S+)", re.IGNORECASE), "parse_for_each_line"),
+    (re.compile(r"call forth the echos of the sanctum of (\S+) and seal them to (\S+)", re.IGNORECASE), "parse_read_lines"),
 
 
     # --- Type Casting ---
