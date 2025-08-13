@@ -42,20 +42,21 @@ $pathsToAdd = @(
     "$pythonInstallPath\Scripts"
 )
 
-$currentUserPath = [Environment]::GetEnvironmentVariable("Path", "User")
-$splitPath = $currentUserPath -split ';' | ForEach-Object { $_.Trim() }
+#$currentUserPath = [Environment]::GetEnvironmentVariable("Path", "User")
+#$splitPath = $currentUserPath -split ';' | ForEach-Object { $_.Trim() }
+#
+#foreach ($path in $pathsToAdd) {
+#    if (-not ($splitPath -contains $path)) {
+#        Write-Host "Adding to PATH: $path"
+#        $splitPath += $path
+#    } else {
+#        Write-Host "Already in PATH: $path"
+#    }
+#}
 
-foreach ($path in $pathsToAdd) {
-    if (-not ($splitPath -contains $path)) {
-        Write-Host "Adding to PATH: $path"
-        $splitPath += $path
-    } else {
-        Write-Host "Already in PATH: $path"
-    }
-}
-
-$newUserPath = ($splitPath -join ';').Trim(';')
-[Environment]::SetEnvironmentVariable("Path", $newUserPath, "User")
+#$newUserPath = ($splitPath -join ';').Trim(';')
+#[Environment]::SetEnvironmentVariable("Path", $newUserPath, "User")
 
 Write-Host "Setup complete."
 Write-Host "Open a NEW terminal to use the 'interpret' command."
+pip install SpeechRecognition pyaudio
