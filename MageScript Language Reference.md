@@ -39,7 +39,7 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `modulo`                               | Modulo (remainder)    | `%`               |
 | `to the power of`                      | Exponentiation        | `**`              |
 
-> These phrases allow chaining complex expressions within natural, spoken-like sentences.
+> These phrases allow chaining complex expressions within spoken sentences.
 
 ### 4. Lists & Arrays
 
@@ -126,10 +126,14 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | Phrase                                                                | Meaning                     | Python Equivalent                           |
 |-------------------------------------------------------------------------------------|-----------------------------|---------------------------------------------|
 | `Unseal the scroll [varname] from [filename]`                                       | Read file into variable     | `varname = open(filename).read()`           |
+| `unveil the scroll [filename] line by line and bind its verses to [list])` | Loop over lines in a file | `open([filename]).readlines()` |
 | `By quill of eternity let the tome of [filename] be born etched in [varname] and sealed in flame` | Write contents to file       | `open(filename, 'w').write(content)`        |
 | `Extend the infinite scroll of [filename] with [varName] that its verses may never cease` | Append contents to file      | `open(filename, 'a').write(content)`        |
 | `Purge the chronicle of [filename] from the vault of aeons that even the gods forget it once was` | Delete a file               | `os.remove(filename)`                       |
-reading line by line, checking if a file or directory exists, as well as creating directories is coming soon...
+| `the aether speaks [filename] does not lie in this realm` | Check if path exists | `os.path.exists([filename])` |
+| `by the will of creation carve the sanctum [dirname] from the bones of the world` | Create a directory | `os.makedirs([dirname])` |
+| `chant upon the verses of [filename] each line known as [item]` | Loop over lines in a file | `for [item] in open([filename]).readlines()` |
+| `call forth the echos of the sanctum of [dirname] and seal them to [list]` | Get files in directory | `os.listdir([filename])` |
 
 ### 12. Classes (Abominations)
 

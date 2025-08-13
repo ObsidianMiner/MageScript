@@ -76,6 +76,12 @@ class Handlers:
 
     def parse_continue(self):
         self.py_lines.append(self.indent() + "continue")
+    
+    def parse_for_each_line(self, path, item):
+        self.py_lines.append(self.indent() + f"import os")
+        itterator_name = item + "_origin_file"
+        self.parse_read_file(itterator_name, path)
+        self.parse_for(itterator_name, item)
 
     # ==========================
     # Conditionals
@@ -161,7 +167,6 @@ class Handlers:
         self.py_lines.append(self.indent() + f"def __init__(self,{params_clean}):")
         self.parser.indent_level += 1
         self.parser.block_stack.append('function')
-
     
     def parse_class_function_call(self, class_name, function_name, params):
         params = params or ""
@@ -183,6 +188,11 @@ class Handlers:
         file_var = varName + "filed"
         self.py_lines.append(self.indent() + f"{file_var} = open({path})")
         self.py_lines.append(self.indent() + f"{varName} = {file_var}.read()")
+    
+    def parse_read_lines(self, varName, path):
+        file_var = varName + "filed"
+        self.py_lines.append(self.indent() + f"{file_var} = open({path})")
+        self.py_lines.append(self.indent() + f"{varName} = {file_var}.readlines()")
 
     def parse_write_file(self, path, name):
         self.py_lines.append(self.indent() + f"with open({path}, 'w') as f:")
@@ -194,6 +204,18 @@ class Handlers:
 
     def parse_delete_file(self, path):
         self.py_lines.append(self.indent() + f"import os\nos.remove({path})")
+    
+    def parse_file_or_path_exists(self, path):
+        self.py_lines.append(self.indent() + f"import os")
+        self.py_lines.append(self.indent() + f"os.path.exists({path})")
+
+    def parse_create_dir(self, path):
+        self.py_lines.append(self.indent() + f"if not os.path.exists({path})")
+        self.py_lines.append(self.indent() + f"    os.makedirs({path})")
+    
+    def parse_list_dir_contents(self, path):
+        self.py_lines.append(self.indent() + f"import os")
+        self.py_lines.append(self.indent() + f"os.listdir({path})")
 
     # ==========================
     # String Operations
