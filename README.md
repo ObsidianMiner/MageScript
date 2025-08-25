@@ -25,11 +25,11 @@ call upon the phrase spicy pickles to the pages of pickles
 call upon the phrase smoky pickles to the pages of pickles
 call upon the phrase who even am I to the pages of pickles
 
-chant upon the pickles each soul called pickle
+chant upon pickles each soul called pickle
     reveal the truth of pickle
     Complete the chant
 
-So it is written
+so it is written
 ```
 This compiles to
 ```pickle.spell.py
