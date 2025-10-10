@@ -12,6 +12,7 @@ class MageScriptPreprocessor:
             line = self.replace_direct_replacements(line)
             line = self.replace_arithmetic(line)
             line = self.replace_thy_access(line)
+            line = self.replace_array_access(line)
             processedLines.append(line)
         
         return processedLines
@@ -28,6 +29,15 @@ class MageScriptPreprocessor:
         for pattern, replacement in replacements.items():
             line = re.sub(pattern, f' {replacement} ', line)
 
+        return line
+    
+    def replace_array_access(self, line):
+        replacements = {
+            r"\bunveil the page of (.+) at (.+)"
+        }
+        
+        for pattern in replacements:
+            line = re.sub(pattern, r"\1[\2]", line)
         return line
 
     def replace_arithmetic(self, line):

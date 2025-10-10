@@ -57,8 +57,11 @@ PATTERNS = [
 
     # --- Output ---
     (re.compile(r"reveal the truth of (.+)", re.IGNORECASE), "parse_print"),
-    (re.compile(r'let the spell echo\s*"(.*)"', re.IGNORECASE), "parse_print_string"),
+    (re.compile(r'let the spell echo\s*"(.+)"', re.IGNORECASE), "parse_print_string"),
     (re.compile(r"whisper to the void (.+)", re.IGNORECASE), "parse_print_string"),
+
+    # -- Arrays ---
+    #(re.compile(r"unveil the page of (.+) at (.+)", re.IGNORECASE), "parse_print_string"),
 
     # --- Input ---
     (re.compile(r"ask the stars for (\S+) saying (.+)", re.IGNORECASE), "parse_input"),

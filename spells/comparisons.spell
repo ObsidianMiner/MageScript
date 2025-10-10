@@ -1,0 +1,31 @@
+#I'ma do soem comparisions and stuff
+
+#These variables will be changed throughout the main while loop
+speak the name of element to be water
+let progress be 0
+
+#Define Strings
+speak the name of fire to be fire
+speak the name of water to be water
+speak the name of lighting to be lighting
+
+#Main Loop
+sustain the chant while not element mirrors fire holds true
+    if fate whispers element mirrors water
+        empower progress by 1
+        if fate whispers progress mirrors 20
+            speak the name of element to be lighting
+            let progress be 0
+        let the omen pass
+    let the omen pass
+    if fate whispers element mirrors lighting
+        empower progress by 1
+        if fate whispers progress mirrors 20
+            let element be fire
+        let the omen pass
+    let the omen pass
+    reveal the truth of progress
+    reveal the truth of element
+complete the chant
+
+so it is written

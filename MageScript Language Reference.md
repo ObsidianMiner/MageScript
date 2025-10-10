@@ -58,6 +58,7 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `Sustain the chant while [condition] holds true` | While loop         | `while condition:`         |
 | `scatter the chant to the winds of finality`         | break              | `break`                     |
 | `pass over this soul in silence`                 | continue           | `continue`                |
+| `Complete the chant`          | Close loop block         |
 
 ### 6. Functions (Rituals)
 
@@ -69,6 +70,7 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `Return [value] to the aether`                       | Return statement           | `return value`                 |
 | `Close the incantation`                              | End function block         | Dedent block                   |
 | `Share [name] with the spirits`                      | Get Global Variable        | `global name`                   |
+| `Close the incantation`       | Close function block     |
 
 ### 7. Conditionals (Fate)
 
@@ -86,7 +88,7 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `wanes below [value]`  | `< [value]`       |
 | `rises above [value]`  | `> [value]`       |
 | `mirrors [value]`      | `== [value]`      |
-
+| `Let the omen pass`           | Close conditional block  |
 ---
 
 ### 8. Output & Input
@@ -143,6 +145,7 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `Fuel the abomination with [param] and [param2]`            | Define the constructor (__init__) with parameters | `def __init__(self, param, param2):`         |
 | `Birth an abomination of [ClassName] named [instanceName] fueled with [args]` | Instantiate an object of a class with arguments | `instanceName = ClassName(args)`              |
 | `The beast`       | Referencing itself                | `self`                          |
+| `Vanish the beast`            | Close class block        |
 ---
 
 ## Code Structure & Parsing Notes
