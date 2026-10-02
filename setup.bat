@@ -4,5 +4,5 @@ REM Run the PowerShell setup script with RemoteSigned execution policy temporari
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0setup.ps1"
 
 echo.
-echo Setup complete. Press any key to exit...
+echo The setup has been completed... Let the spells take hold.
 pause >nul

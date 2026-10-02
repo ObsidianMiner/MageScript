@@ -416,7 +416,7 @@
           "beginCaptures": {
             "0": { "name": "keyword.control.list.append" }
           },
-          "end": "(?=\\s|$)",
+          "end": "$",
           "patterns": [
             { "include": "#strings" },
             { "include": "#numbers" },

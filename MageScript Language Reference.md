@@ -28,7 +28,7 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `Divide the soul of [name] by the decree of [value]`   | Divide          | `name -= value`      |
 | `Mark [name] with the remainder after striking by [value]`   | Modulo          | `name -= value`      |
 
-### 3. Arithmetic
+### 3. Opperators
 
 | Phrase                                | Meaning              | Python Equivalent |
 |----------------------------------------|-----------------------|-------------------|
@@ -38,6 +38,7 @@ MageScript is a theatrical, speech-driven programming language built to compile 
 | `striked by`                           | Divide                | `/`               |
 | `modulo`                               | Modulo (remainder)    | `%`               |
 | `to the power of`                      | Exponentiation        | `**`              |
+| `thy y of x`            | Member acsess operator        | `y.x`
 
 > These phrases allow chaining complex expressions within spoken sentences.
 

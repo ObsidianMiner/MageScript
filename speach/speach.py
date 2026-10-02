@@ -90,6 +90,7 @@ def listen_for_spell_vos():
 				print("\r… " + partial, end="")
 	return "\n".join(lines)
 
+
 #region fallback recog
 def listen_for_spell_reg():
 	recognizer = sr.Recognizer()

@@ -40,3 +40,7 @@ pickles.append("who even am i")
 for pickle in pickles:
     print(pickle)
 ```
+
+You can find the entire documentation in ```MageScriptLanguageReference.md```
+
+If you want the true experience run speach.py, and try to actualy speak everything out

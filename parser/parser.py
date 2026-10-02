@@ -51,7 +51,7 @@ class MageScriptParser:
                     break
 
             if not matched:
-                raise SyntaxError(f"Unknown or unsupported statement at line {lineno}: '{line}'")
+                raise SyntaxError(f"Gibberish and heresy on line {lineno}: '{line}'")
 
             if self.ended:
                 break

@@ -1,5 +1,7 @@
 # Enable strict error handling
 $ErrorActionPreference = 'Stop'
+#Requires -RunAsAdministrator
+
 
 # Define paths
 $projectDir = $PSScriptRoot
@@ -42,20 +44,26 @@ $pathsToAdd = @(
     "$pythonInstallPath\Scripts"
 )
 
-#$currentUserPath = [Environment]::GetEnvironmentVariable("Path", "User")
-#$splitPath = $currentUserPath -split ';' | ForEach-Object { $_.Trim() }
-#
-#foreach ($path in $pathsToAdd) {
-#    if (-not ($splitPath -contains $path)) {
-#        Write-Host "Adding to PATH: $path"
-#        $splitPath += $path
-#    } else {
-#        Write-Host "Already in PATH: $path"
-#    }
-#}
+# Get the current PATH environment variable for the machine
+$currentPath = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine)
 
-#$newUserPath = ($splitPath -join ';').Trim(';')
-#[Environment]::SetEnvironmentVariable("Path", $newUserPath, "User")
+foreach ($newPath in $pathsToAdd) {
+    # Check if the new path is already in the PATH variable
+    if ($currentPath -notlike "*$newPath*") {
+        # If the new path is not in the PATH variable, add it
+        $newPathValue = "$currentPath;$newPath"
+
+        try {
+            # Set the new PATH environment variable
+            [System.Environment]::SetEnvironmentVariable("Path", $newPathValue, [System.EnvironmentVariableTarget]::Machine)
+            Write-Output "The path has been added successfully."
+        } catch {
+            Write-Error "Failed to set the environment variable: $_"
+        }
+    } else {
+        Write-Output "The path is already in the PATH variable."
+    }
+}
 
 Write-Host "Setup complete."
 Write-Host "Open a NEW terminal to use the 'interpret' command."
